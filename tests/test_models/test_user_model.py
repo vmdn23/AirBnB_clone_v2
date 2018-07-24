@@ -5,7 +5,9 @@
 '''
 
 import unittest
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String
+from os import getenv
 from models.user import User
 from io import StringIO
 import sys
@@ -23,6 +25,13 @@ class TestUser(unittest.TestCase):
         '''
         new_user = User()
         self.assertIsInstance(new_user, BaseModel)
+
+    def test_User_inheritance_b(self):
+        '''
+            tests that the User class Inherits from Base
+        '''
+        new_user = User()
+        self.assertIsInstance(new_user, Base)
 
     def test_User_attributes(self):
         '''
@@ -66,3 +75,5 @@ class TestUser(unittest.TestCase):
         new = User()
         name = getattr(new, "password")
         self.assertIsInstance(name, str)
+
+    #add tests for db storage
