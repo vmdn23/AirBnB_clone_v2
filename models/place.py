@@ -41,4 +41,12 @@ class Place(BaseModel, Base):
         amenity_ids = []
 
         @property
-        def 
+        def reviews(self):
+            '''
+            Returns the list of Review instances with place_id==review.place_id
+            '''
+            list_review = []
+            for review_inst in models.classes[Review].values():
+                if review_inst.place_id == self.id:
+                    list_review.append(review_inst)
+            return list_review
