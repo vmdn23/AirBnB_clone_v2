@@ -2,9 +2,12 @@
 '''
     Define the class City.
 '''
+import models
 from models.base_model import BaseModel, Base
-import os 
+from models.place import Place
+from os import getenv 
 from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 class City(BaseModel, Base):
     '''
@@ -12,9 +15,8 @@ class City(BaseModel, Base):
     '''
     __tablename__ = "cities"
 
-    name = ""
-    state_id = ""
-
-    if os.environ.get("HBNB_TYPE_STORAGE") == "db":
-        name = Column(String(128), nullable=False)
-        state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
+    name = Column(String(128), nullable=False)
+    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
+        
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        places = relationship(Place, backref="cities", cascade="all, delete-orphan")

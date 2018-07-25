@@ -28,13 +28,15 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
-                                                     "%Y-%m-%dT%H:%M:%S.%f")
-            kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
-                                                     "%Y-%m-%dT%H:%M:%S.%f")
+            self.id = str(uuid.uuid4())
             for key, val in kwargs.items():
-                if "__class__" not in key:
-                    setattr(self, key, val)
+                if key == 'created_at':
+                    setattr(self, "created_at", datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f"))
+                elif key == 'updated_at':
+                    setattr(self, "updated_at", datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f"))
+                else:
+                    if "__class__" !=  key:
+                        setattr(self, key, val)
 
     def __str__(self):
         '''
@@ -69,10 +71,10 @@ class BaseModel:
 
         if hasattr(self, "_sa_instance_state"):
             cp_dct.pop("_sa_instance_state", None)
-        return (cp_dct)
+        return cp_dct
 
     def delete(self):
         '''
             delete the current instance from the storage
         '''
-        self.models.storage.delete()
+#        self.models.storage.delete()
