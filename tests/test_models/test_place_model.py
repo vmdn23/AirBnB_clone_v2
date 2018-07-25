@@ -4,6 +4,7 @@
     All the test for the user model are implemented here.
 '''
 
+import os
 import unittest
 from models.base_model import BaseModel
 from models.place import Place
@@ -45,6 +46,8 @@ class TestUser(unittest.TestCase):
         self.assertTrue("longitude" in self.new_place.__dir__())
         self.assertTrue("amenity_ids" in self.new_place.__dir__())
 
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "longitude")
     def test_type_longitude(self):
         '''
             Test the type of longitude.
@@ -52,6 +55,7 @@ class TestUser(unittest.TestCase):
         longitude = getattr(self.new_place, "longitude")
         self.assertIsInstance(longitude, float)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "latitude")
     def test_type_latitude(self):
         '''
             Test the type of latitude
@@ -66,6 +70,7 @@ class TestUser(unittest.TestCase):
         amenity = getattr(self.new_place, "amenity_ids")
         self.assertIsInstance(amenity, list)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "price by night")
     def test_type_price_by_night(self):
         '''
             Test the type of price_by_night
@@ -73,6 +78,7 @@ class TestUser(unittest.TestCase):
         price_by_night = getattr(self.new_place, "price_by_night")
         self.assertIsInstance(price_by_night, int)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "guest")
     def test_type_max_guest(self):
         '''
             Test the type of max_guest
@@ -80,6 +86,7 @@ class TestUser(unittest.TestCase):
         max_guest = getattr(self.new_place, "max_guest")
         self.assertIsInstance(max_guest, int)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "bathroom")
     def test_type_number_bathrooms(self):
         '''
             Test the type of number_bathrooms
@@ -87,6 +94,7 @@ class TestUser(unittest.TestCase):
         number_bathrooms = getattr(self.new_place, "number_bathrooms")
         self.assertIsInstance(number_bathrooms, int)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "rooms")
     def test_type_number_rooms(self):
         '''
             Test the type of number_bathrooms
@@ -94,6 +102,7 @@ class TestUser(unittest.TestCase):
         number_rooms = getattr(self.new_place, "number_rooms")
         self.assertIsInstance(number_rooms, int)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "description")
     def test_type_description(self):
         '''
             Test the type of description
@@ -101,6 +110,7 @@ class TestUser(unittest.TestCase):
         description = getattr(self.new_place, "description")
         self.assertIsInstance(description, str)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "name")
     def test_type_name(self):
         '''
             Test the type of name
@@ -108,6 +118,7 @@ class TestUser(unittest.TestCase):
         name = getattr(self.new_place, "name")
         self.assertIsInstance(name, str)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "user id")
     def test_type_user_id(self):
         '''
             Test the type of user_id
@@ -115,6 +126,7 @@ class TestUser(unittest.TestCase):
         user_id = getattr(self.new_place, "user_id")
         self.assertIsInstance(user_id, str)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "city id")
     def test_type_city_id(self):
         '''
             Test the type of city_id

@@ -4,6 +4,7 @@
     All the test for the user model are implemented here.
 '''
 
+import os
 import unittest
 from models.base_model import BaseModel
 from models.user import User
@@ -35,6 +36,7 @@ class TestUser(unittest.TestCase):
         self.assertTrue("last_name" in new_user.__dir__())
         self.assertTrue("password" in new_user.__dir__())
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "email")
     def test_type_email(self):
         '''
             Test the type of name
@@ -43,6 +45,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new, "email")
         self.assertIsInstance(name, str)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "first_name")
     def test_type_first_name(self):
         '''
             Test the type of name
@@ -51,6 +54,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new, "first_name")
         self.assertIsInstance(name, str)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "last_name")
     def test_type_last_name(self):
         '''
             Test the type of last_name
@@ -59,6 +63,7 @@ class TestUser(unittest.TestCase):
         name = getattr(new, "last_name")
         self.assertIsInstance(name, str)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "password")
     def test_type_password(self):
         '''
             Test the type of password

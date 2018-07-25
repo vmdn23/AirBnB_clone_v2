@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 ''' Test suite for the console'''
 
-
+import os
 import sys
 import models
 import unittest
@@ -42,6 +42,7 @@ class test_console(unittest.TestCase):
         console.onecmd("all")
         self.assertTrue(isinstance(self.capt_out.getvalue(), str))
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "test show")
     def test_show(self):
         '''
             Testing that show exists

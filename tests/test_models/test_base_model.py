@@ -4,6 +4,7 @@
     All the test for the base_model are implemented here.
 '''
 
+import os
 import unittest
 from models.base_model import BaseModel
 from io import StringIO
@@ -55,6 +56,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(self.my_model.updated_at.year,
                          self.my_model.created_at.year)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "save")
     def test_save(self):
         '''
             Checks that after updating the instance; the dates differ in the

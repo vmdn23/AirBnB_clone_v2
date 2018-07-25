@@ -4,6 +4,7 @@
     All the test for the user model are implemented here.
 '''
 
+import os
 import unittest
 from models.base_model import BaseModel
 from models.review import Review
@@ -31,7 +32,8 @@ class TestReview(unittest.TestCase):
         self.assertTrue("user_id" in new_review.__dir__())
         self.assertTrue("text" in new_review.__dir__())
 
-   def test_Review_attributes(self):
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "review attr")
+    def test_Review_attributes(self):
         '''
             Test that Review class has place_id, user_id and text
             attributes.

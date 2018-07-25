@@ -4,6 +4,7 @@
     All the test for the amenity model are implemented here.
 '''
 
+import os
 import unittest
 from models.base_model import BaseModel
 from models.amenity import Amenity
@@ -28,6 +29,7 @@ class TestAmenity(unittest.TestCase):
         new_amenity = Amenity()
         self.assertTrue("name" in new_amenity.__dir__())
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "attr type")
     def test_Amenity_attribute_type(self):
         '''
             Test that Amenity class had name attribute's type.
