@@ -3,7 +3,7 @@
     Contain tests for the state module.
 '''
 
-import os
+from os import remove, getenv
 import unittest
 from models.base_model import BaseModel
 from models.state import State
@@ -13,6 +13,25 @@ class TestState(unittest.TestCase):
     '''
         Test the State class.
     '''
+
+    @classmethod
+    def setUpClass(cls):
+        '''
+            Sets up unittest
+        '''
+        cls.new_state = State()
+        cls.new_state.name = "Hawaii"
+
+    @classmethod
+    def tearDownClass(cls):
+        '''
+            Tears down unittests
+        '''
+        del cls.new_state
+        try:
+            remove("file.json")
+        except FileNotFoundError:
+            pass
 
     def test_State_inheritence(self):
         '''
@@ -28,7 +47,7 @@ class TestState(unittest.TestCase):
         new_state = State()
         self.assertTrue("name" in new_state.__dir__())
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "state attr")
+    @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db', "state attr")
     def test_State_attributes_type(self):
         '''
             Test that State class attribute name is class type str.

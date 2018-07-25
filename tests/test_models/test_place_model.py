@@ -19,7 +19,11 @@ class TestUser(unittest.TestCase):
         '''
             Creates an instance for place.
         '''
-        self.new_place = Place()
+        self.new_place = Place(city_id="Paris", user_id="Betty",
+                               description="lovely", number_rooms=3,
+                               number_bathrooms=3, max_guest=3,
+                               price_by_night=100, latitude=1.1,
+                               longitude=2.2)
 
     def TearDown(self):
         pass

@@ -19,7 +19,7 @@ class TestReview(unittest.TestCase):
         '''
             tests that the Review class Inherits from BaseModel
         '''
-        new_review = Review()
+        new_review = Review(place_id="Paris", user_id="Betty")
         self.assertIsInstance(new_review, BaseModel)
 
     def test_Review_attributes(self):

@@ -41,3 +41,8 @@ class testDBStorage(unittest.TestCase):
         '''
         new_usr = User(email="betty@holberton.com", password="ENIAC")
         self.assertTrue(new_usr.email, "betty@holberton.com")
+        self.assertTrue(hasattr(new_usr, "__tablename__"))
+        self.assertTrue(hasattr(new_usr, "email"))
+        self.assertTrue(hasattr(new_usr, "password"))
+        self.assertTrue(hasattr(new_usr, "first_name"))
+        self.assertTrue(hasattr(new_usr, "last_name"))
