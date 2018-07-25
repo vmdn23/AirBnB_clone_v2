@@ -46,7 +46,6 @@ class TestUser(unittest.TestCase):
         self.assertTrue("longitude" in self.new_place.__dir__())
         self.assertTrue("amenity_ids" in self.new_place.__dir__())
 
-
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "longitude")
     def test_type_longitude(self):
         '''

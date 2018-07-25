@@ -2,15 +2,16 @@
 '''
     Testing the file_storage module.
 '''
-
 import os
 import time
 import json
 import unittest
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models.state import State
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "DB tests")
 class testFileStorage(unittest.TestCase):
     '''
         Testing the FileStorage class
@@ -101,3 +102,18 @@ class testFileStorage(unittest.TestCase):
             self.assertTrue(True)
         except:
             self.assertTrue(False)
+
+    def test_delete(self):
+        '''
+            Tests delete
+        '''
+        fs = FileStorage()
+        entry = State()
+        fs.new(entry)
+        state_id = entry.id
+        fs.save()
+        fs.delete(entry)
+        with open("file.json", encoding="UTF-8") as f:
+            entry_dict = json.load(f)
+        for key, value in entry_dict.items():
+            self.assertFalse(state_id == key.split('.')[1])
