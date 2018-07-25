@@ -6,6 +6,7 @@ import cmd
 import json
 import shlex
 from models import storage
+from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -61,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
                     pass
             new_instance.save()
             print(new_instance.id)
-        except KeyError:
+        except:
             print("** class doesn't exist **")
             return
 

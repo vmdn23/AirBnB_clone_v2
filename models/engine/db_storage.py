@@ -28,9 +28,6 @@ class DBStorage:
 
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
                  user, pwd, host, db), pool_pre_ping=True)
-        # Create all the tables in the database which are
-        # defined by Base's subclasses
-        Base.metadata.create_all(self.__engine)
 
         if getenv('HBNB_MYSQL_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
@@ -42,14 +39,14 @@ class DBStorage:
         '''
         dict_db = {}
         if cls != None:
-            entry = self.__session.query(models.temp_cls[cls]).all()
+            entry = self.__session.query(models.classes[cls]).all()
             for obj in entry:
                 # under the hood, sqlalchemy converts entry to objects
                 # allowing access to object attributes
                 key = "{}.{}".format(obj.__class__.__name__, obj.id)
                 dict_db[key] = obj
         else:
-            for k, v in models.temp_cls.items():
+            for k, v in models.classes.items():
                 if k != "BaseModel":
                     for obj in self.__session.query(v).all():
                         key = "{}.{}".format(obj.__class__.__name__, obj.id)
@@ -74,6 +71,9 @@ class DBStorage:
         '''
             Starts a global session
         '''
+        # Create all the tables in the database which are
+        # defined by Base's subclasses
+        Base.metadata.create_all(self.__engine)
         # create a configured factory class 
         factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         # create a global session for all to use

@@ -15,18 +15,19 @@ class State(BaseModel, Base):
     '''
     __tablename__ = "states"
 
+    name = Column(String(128), nullable=False)
+
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        name = Column(String(128), nullable=False)
         cities = relationship(City, backref="state", cascade="all, delete-orphan")
     else:
-        name = ""
         @property
         def cities(self):
             '''
              FileStorage to return City instances with state_id == current State.id
             '''
+            from models import storage
             list_cities = []
-            for city_inst in models.classes[City].values():
+            for city_inst in storage.all(City).values():
                 if city_inst.state_id == self.id:
                     list_cities.append(city_inst)
             return list_cities
