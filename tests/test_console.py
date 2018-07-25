@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 ''' Test suite for the console'''
 
+
 import os
 import sys
 import models
+import os
+import pep8
+import sys
 import unittest
 from io import StringIO
 from console import HBNBCommand

@@ -32,11 +32,12 @@ class TestReview(unittest.TestCase):
         self.assertTrue("user_id" in new_review.__dir__())
         self.assertTrue("text" in new_review.__dir__())
 
+
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "review attr")
     def test_Review_attributes(self):
         '''
             Test that Review class has place_id, user_id and text
-            attributes.
+            attributes
         '''
         new_review = Review()
         place_id = getattr(new_review, "place_id")
