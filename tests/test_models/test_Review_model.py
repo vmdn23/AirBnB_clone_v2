@@ -31,7 +31,7 @@ class TestReview(unittest.TestCase):
         self.assertTrue("user_id" in new_review.__dir__())
         self.assertTrue("text" in new_review.__dir__())
 
-    def test_Review_attributes(self):
+   def test_Review_attributes(self):
         '''
             Test that Review class has place_id, user_id and text
             attributes.
