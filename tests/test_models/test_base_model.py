@@ -14,7 +14,7 @@ import datetime
 
 class TestBase(unittest.TestCase):
     '''
-        Testing the base class model.
+        Testing the base class model
     '''
 
     def test_docstring(self):
