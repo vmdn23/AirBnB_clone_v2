@@ -67,6 +67,6 @@ class Place(BaseModel, Base):
             '''
             Append amenity.id to the attribute amenity_ids in place instance
             '''
-            for inst in storage.all(Amenity).values():
-                if inst.place_id_ == self.id:
-                    amenity_ids.append(inst)
+            for obj in storage.all(Amenity).values():
+                if obj.place_id_ == self.id:
+                    amenity_ids.append(obj)
