@@ -17,6 +17,24 @@ class testFileStorage(unittest.TestCase):
         Testing the FileStorage class
     '''
 
+    def test_docstring(self):
+        '''
+        check that docstring exist
+        '''
+        self.assertTrue(len(FileStorage.__doc__) > 1)
+        self.assertTrue(len(FileStorage.all.__doc__) > 1)
+        self.assertTrue(len(FileStorage.new.__doc__) > 1)
+        self.assertTrue(len(FileStorage.save.__doc__) > 1)
+        self.assertTrue(len(FileStorage.reload.__doc__) > 1)
+
+    def test_pep8(self):
+        '''
+        test pep8 comes back clean
+        '''
+        style = pep8.StyleGuide(quiet=True)
+        result = style.check_files(['models/engine/file_storage'])
+        self.assertEqual(result.total_errors, 0, "pep8")
+
     def setUp(self):
         '''
             Initializing classes

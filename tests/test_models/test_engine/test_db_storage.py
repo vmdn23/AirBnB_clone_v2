@@ -12,8 +12,26 @@ from os import getenv
 @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db', "DB tests")
 class testDBStorage(unittest.TestCase):
     '''
-        DB_stroage class testing
+        DBStorage class testing
     '''
+    def test_docstring(self):
+        '''
+        check that docstring exist
+        '''
+        self.assertTrue(len(DBStorage.__doc__) > 1)
+        self.assertTrue(len(DBStorage.all.__doc__) > 1)
+        self.assertTrue(len(DBStorage.new.__doc__) > 1)
+        self.assertTrue(len(DBStorage.save.__doc__) > 1)
+        self.assertTrue(len(DBStorage.reload.__doc__) > 1)
+
+    def test_pep8(self):
+        '''
+        test pep8 comes back clean
+        '''
+        style = pep8.StyleGuide(quiet=True)
+        result = style.check_files(['models/engine/db_storage'])
+        self.assertEqual(result.total_errors, 0, "pep8")
+
     @classmethod
     def setUpClass(cls):
         '''

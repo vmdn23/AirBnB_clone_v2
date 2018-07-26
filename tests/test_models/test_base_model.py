@@ -17,6 +17,25 @@ class TestBase(unittest.TestCase):
         Testing the base class model.
     '''
 
+    def test_docstring(self):
+        '''
+        check that docstring exist
+        '''
+        self.assertTrue(len(BaseModel.__doc__) > 1)
+        self.assertTrue(len(BaseModel.all.__doc__) > 1)
+        self.assertTrue(len(BaseModel.new.__doc__) > 1)
+        self.assertTrue(len(BaseModel.save.__doc__) > 1)
+        self.assertTrue(len(BaseModel.to_dict.__doc__) > 1)
+        self.assertTrue(len(BaseModel.delete.__docs__) > 1)
+
+    def test_pep8(self):
+        '''
+        test pep8 comes back clean
+        '''
+        style = pep8.StyleGuide(quiet=True)
+        result = style.check_files(['models/base_model'])
+        self.assertEqual(result.total_errors, 0, "pep8")
+
     def setUp(self):
         '''
             Initializing instance.
