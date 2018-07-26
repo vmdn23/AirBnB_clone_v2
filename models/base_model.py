@@ -8,7 +8,9 @@ import models
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 
+
 Base = declarative_base()
+
 
 class BaseModel:
     '''
@@ -17,7 +19,6 @@ class BaseModel:
     id = Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
-
 
     def __init__(self, *args, **kwargs):
         '''
@@ -31,11 +32,15 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             for key, val in kwargs.items():
                 if key == 'created_at':
-                    setattr(self, "created_at", datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(
+                        self, "created_at", datetime.strptime(
+                            val, "%Y-%m-%dT%H:%M:%S.%f"))
                 elif key == 'updated_at':
-                    setattr(self, "updated_at", datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(
+                        self, "updated_at", datetime.strptime(
+                            val, "%Y-%m-%dT%H:%M:%S.%f"))
                 else:
-                    if "__class__" !=  key:
+                    if "__class__" != key:
                         setattr(self, key, val)
 
     def __str__(self):

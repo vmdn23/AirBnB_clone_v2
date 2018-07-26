@@ -9,13 +9,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 
+
 class DBStorage:
     '''
         Serializes instances to JSON file and deserializes to JSON file.
     '''
     __engine = None
     __session = None
-
 
     def __init__(self):
         '''
@@ -27,18 +27,17 @@ class DBStorage:
         db = getenv('HBNB_MYSQL_DB')
 
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
-                 user, pwd, host, db), pool_pre_ping=True)
+            user, pwd, host, db), pool_pre_ping=True)
 
         if getenv('HBNB_MYSQL_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
-
 
     def all(self, cls=None):
         '''
             Return a dictionary of SQL objects
         '''
         dict_db = {}
-        if cls != None:
+        if cls is not None:
             entry = self.__session.query(models.classes[cls]).all()
             for obj in entry:
                 # under the hood, sqlalchemy converts entry to objects
@@ -74,12 +73,11 @@ class DBStorage:
         # Create all the tables in the database which are
         # defined by Base's subclasses
         Base.metadata.create_all(self.__engine)
-        # create a configured factory class 
+        # create a configured factory class
         factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         # create a global session for all to use
         Session = scoped_session(factory)
         self.__session = Session()
-
 
     def delete(self, obj=None):
         '''
