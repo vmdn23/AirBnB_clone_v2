@@ -8,7 +8,7 @@ from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
 from models.amenity import Amenity
-from models import storage
+
 
 place_amenity = Table("place_amenity", Base.metadata,
                       Column('place_id', String(60),
@@ -67,6 +67,7 @@ class Place(BaseModel, Base):
             '''
             Append amenity.id to the attribute amenity_ids in place instance
             '''
-            for obj in storage.all(Amenity).values():
-                if obj.place_id_ == self.id:
-                    amenity_ids.append(obj)
+            for inst in obj:
+                if obj.__class.__name__ == "Amenity":
+                    if inst.place_id == self.id:
+                        amenity_ids.append(inst)
