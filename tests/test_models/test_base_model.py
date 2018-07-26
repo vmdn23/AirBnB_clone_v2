@@ -22,10 +22,8 @@ class TestBase(unittest.TestCase):
         check that docstring exist
         '''
         self.assertTrue(len(BaseModel.__doc__) > 1)
-        self.assertTrue(len(BaseModel.new.__doc__) > 1)
         self.assertTrue(len(BaseModel.save.__doc__) > 1)
         self.assertTrue(len(BaseModel.to_dict.__doc__) > 1)
-        self.assertTrue(len(BaseModel.delete.__docs__) > 1)
 
     def setUp(self):
         '''
