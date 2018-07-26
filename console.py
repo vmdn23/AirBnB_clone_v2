@@ -16,6 +16,7 @@ from models.amenity import Amenity
 from models.review import Review
 from ast import literal_eval
 
+
 class HBNBCommand(cmd.Cmd):
     '''
         Contains the entry point of the command interpreter.
@@ -53,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
                     if hasattr(new_instance, key) is True:
                         value = value.replace("_", " ")
                         try:
-                            #turns str into int | float
+                            # turns str into int | float
                             value = literal_eval(value)
                         except:
                             pass
