@@ -10,10 +10,10 @@ from os import getenv
 from models.amenity import Amenity
 
 place_amenity = Table("place_amenity", Base.metadata,
-                      Column('place_id', String(60), ForeignKey("places.id"),
-                                      nullable=False),
-                      Column('amenities_id', String(60), ForeignKey("amenities.id"),
-                                      nullable=False))
+                      Column('place_id', String(60),
+                             ForeignKey("places.id"), nullable=False),
+                      Column('amenities_id', String(60),
+                             ForeignKey("amenities.id"), nullable=False))
 
 
 class Place(BaseModel, Base):
