@@ -10,10 +10,10 @@ from os import getenv
 from models.amenity import Amenity
 
 place_amenity = Table("place_amenity", Base.metadata,
-                      Column('place_id', String(60), ForeignKey("places.id"),
-                                      nullable=False),
-                      Column('amenities_id', String(60), ForeignKey("amenities.id"),
-                                      nullable=False))
+                      Column('place_id', String(60),
+                             ForeignKey("places.id"), nullable=False),
+                      Column('amenities_id', String(60),
+                             ForeignKey("amenities.id"), nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -59,16 +59,14 @@ class Place(BaseModel, Base):
             '''
             return list of Amenity instances with place.id = amenity.place_id
             '''
-            from models import storage
-            for amen_inst in storage.all(Amenity).values():
-                if amen_inst == self.id:
-                    list_amenties.append(amen_inst)
-            return list_amenities
+            return self.amenity_ids
 
         @amenities.setter
         def amenities(self, obj):
             '''
             Append amenity.id to the attribute amenity_ids in place instance
             '''
-            if isinstance(obj, Amenity):
-                amenity_ids.append(obj.id)
+            for inst in obj:
+                if obj.__class.__name__ == "Amenity":
+                    if inst.place_id == self.id:
+                            amenity_ids.append(inst)
