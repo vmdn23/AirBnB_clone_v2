@@ -19,7 +19,7 @@ class FileStorage:
         '''
         dict_fs = {}
 
-        if cls == None:
+        if cls is None:
             return self.__objects
         else:
             for k, v in self.__objects.items():

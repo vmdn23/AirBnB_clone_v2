@@ -9,6 +9,7 @@ from os import getenv
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
+
 class State(BaseModel, Base):
     '''
         Implementation for the State.
@@ -18,12 +19,16 @@ class State(BaseModel, Base):
     name = Column(String(128), nullable=False)
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        cities = relationship(City, backref="state", cascade="all, delete-orphan")
+        cities = relationship(
+            City,
+            backref="state",
+            cascade="all, delete-orphan")
     else:
         @property
         def cities(self):
             '''
-             FileStorage to return City instances with state_id == current State.id
+             FileStorage to return City
+            instances with state_id == current State.id
             '''
             from models import storage
             list_cities = []
