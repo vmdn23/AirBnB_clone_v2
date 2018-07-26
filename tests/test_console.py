@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 ''' Test suite for the console'''
 
-
 import sys
 import models
+import os
 import unittest
 from io import StringIO
 from console import HBNBCommand
@@ -42,6 +42,7 @@ class test_console(unittest.TestCase):
         console.onecmd("all")
         self.assertTrue(isinstance(self.capt_out.getvalue(), str))
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', "test show")
     def test_show(self):
         '''
             Testing that show exists
@@ -131,14 +132,3 @@ class test_console(unittest.TestCase):
         console.onecmd("create Binita")
         x = (self.capt_out.getvalue())
         self.assertEqual("** class doesn't exist **\n", x)
-
-    '''
-    def test_destroy(self):
-        console = self.create()
-        self.assertTrue(console.onecmd("destroy"))
-
-    def test_update(self):
-        console = self.create()
-        self.assertTrue(console.onecmd("update"))
-
-    '''
