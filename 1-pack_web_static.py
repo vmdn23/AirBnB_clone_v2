@@ -1,11 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 """
-Fabric script that generates a .tgz archive from the contents 
+Fabric script that generates a .tgz archive from the contents
 of the web_static folder of the AirBnB Clone repo
 """
-
-
-
 
 
 def do_pack():
@@ -18,12 +15,12 @@ def do_pack():
         Else, return None
 
     """
-
-    from fabric.operations import local, run, put, env
-    from datetime import datetime 
+    from fabric.operations import local
+    from datetime import datetime
 
     time = datetime.now().strftime("%Y%m%d%H%M%S%f")
-    name = "./version/web_static_{}".format(time)
+    name = "./versions/web_static_{}.tgz".format(time)
+    local("mkdir -p versions")
 
     tar_file = local("tar -czfv {} web_static".format(name))
 
@@ -31,5 +28,3 @@ def do_pack():
         return name
     else:
         return None
-
-
