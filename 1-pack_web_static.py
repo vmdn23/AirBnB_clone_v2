@@ -20,7 +20,7 @@ def do_pack():
 
     time = datetime.now().strftime("%Y%m%d%H%M%S")
     local("mkdir -p versions")
-    name = "./versions/web_static_{}.tgz".format(time)
+    name = "versions/web_static_{}.tgz".format(time)
     tar_file = local("tar -cvzf {} web_static".format(name))
 
     if tar_file.succeeded:
