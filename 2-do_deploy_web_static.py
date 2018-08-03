@@ -9,8 +9,8 @@ from fabric.api import local, run, env, put
 from datetime import datetime
 import logging
 
-logger = logging.getLogger('ftpuploader')
 
+logger = logging.getLogger('ftpuploader')
 env.hosts = ['35.237.237.122', '35.237.87.28']
 env.user = "ubuntu"
 env.key_filename = "~/.ssh/holberton"
@@ -39,6 +39,7 @@ def do_deploy(archive_path):
         return True
 
     except Exception as e:
+        # Checks for errors 
         logger.error(str(e))
         print('New version has not been deployed...')
         return False
