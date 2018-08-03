@@ -39,6 +39,7 @@ def do_pack():
     else:
         return None
 
+
 def do_deploy(archive_path):
     """
     Distributes an archive to your web servers
@@ -65,6 +66,7 @@ def do_deploy(archive_path):
         logger.error(str(e))
         print('New version has not been deployed...')
         return False
+
 
 def deploy():
     """
