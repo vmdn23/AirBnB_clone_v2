@@ -17,5 +17,6 @@ def hbhb():
     """Displays HBNB"""
     return 'HBNB'
 
+
 if __name__ == "__main__":
     app.run()
