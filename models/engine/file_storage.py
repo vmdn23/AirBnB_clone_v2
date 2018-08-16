@@ -2,6 +2,8 @@
 '''
     Define class FileStorage
 '''
+
+
 import json
 import models
 
@@ -70,3 +72,9 @@ class FileStorage:
             key = str(obj.__class__.__name__) + "." + str(obj.id)
             FileStorage().__objects.pop(key, None)
             FileStorage().save()
+
+    def close(self):
+        '''
+        Call reload() method for deserializing the JSON file to objects
+        '''
+        self.reload()

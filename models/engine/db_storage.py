@@ -3,6 +3,7 @@
     Define class DBStorage
 '''
 
+
 from os import getenv
 import models
 from sqlalchemy import create_engine
@@ -85,3 +86,9 @@ class DBStorage:
         '''
         if obj is not None:
             self.__session.delete(obj)
+
+    def close(self):
+        '''
+            Close and clears all items and ends any transaction in progress
+        '''
+        self.__session.close()
