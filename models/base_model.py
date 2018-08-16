@@ -2,6 +2,8 @@
 '''
     This module defines the BaseModel class
 '''
+
+
 import uuid
 from datetime import datetime
 import models
@@ -28,20 +30,21 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+
         else:
-            self.id = str(uuid.uuid4())
+            try:
+                kwargs['created_at'] = datetime.strptime(kwargs["created_at"],
+                                                         "%Y-%m-%dT%H:%M:%S.%f")
+                kwargs['updated_at'] = datetime.strptime(kwargs["created_at"],
+                                                         "%Y-%m-%dT%H:%M:%S.%f")
+
+            except KeyError:
+                self.id = str(uuid.uuid4())
+                self.created_at = datetime.now()
+                self.updated_at = datetime.now()
             for key, val in kwargs.items():
-                if key == 'created_at':
-                    setattr(
-                        self, "created_at", datetime.strptime(
-                            val, "%Y-%m-%dT%H:%M:%S.%f"))
-                elif key == 'updated_at':
-                    setattr(
-                        self, "updated_at", datetime.strptime(
-                            val, "%Y-%m-%dT%H:%M:%S.%f"))
-                else:
-                    if "__class__" != key:
-                        setattr(self, key, val)
+                if "__class__" != key:
+                    setattr(self, key, val)
 
     def __str__(self):
         '''
