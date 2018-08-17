@@ -91,4 +91,4 @@ class DBStorage:
         '''
             Close and clears all items and ends any transaction in progress
         '''
-        self.__session.close()
+        self.__session.remove()
